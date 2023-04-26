@@ -17,7 +17,7 @@ class _OnbordingViewState extends State<OnbordingView> {
   
   late List<SliderObject> _list = getSliderData();
   final PageController _pageController = PageController();
-  int _currentIndex  =0;
+  int _currentIndex  =10;
 
 
 
