@@ -55,9 +55,17 @@ ThemeData getApplicationTheme() {
         color: ColorManager.darkGray,
         fontSize: FontSizeManager.s16,
       ),
-      titleMedium: getMediumStyle(
-        color: ColorManager.lightGray,
+       headlineMedium: getRegularStyle(
+        color: ColorManager.darkGray,
         fontSize: FontSizeManager.s14,
+      ),
+      titleMedium: getRegularStyle(
+        color: ColorManager.darkGray,
+        fontSize: FontSizeManager.s14,
+      ),
+      displayLarge: getSemiBoldStyle(
+        color: ColorManager.darkGray,
+        fontSize: FontSizeManager.s16,
       ),
       bodyLarge: getRegularStyle(color: ColorManager.gray),
       bodySmall: getLightStyle(
@@ -104,7 +112,7 @@ ThemeData getApplicationTheme() {
         ),
       ),
       //errorBorder
-      errorBorder:  OutlineInputBorder(
+      errorBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: ColorManager.erroe,
           width: AppSize.s1_5,
@@ -127,7 +135,6 @@ ThemeData getApplicationTheme() {
           ),
         ),
       ),
-      
     ),
   );
 }
