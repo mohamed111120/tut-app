@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tut/presentation/resorces/assets_manager.dart';
 import 'package:tut/presentation/resorces/color_manager.dart';
+import 'package:tut/presentation/resorces/routes_manager.dart';
 import 'package:tut/presentation/resorces/strings_manager.dart';
 import 'package:tut/presentation/resorces/values_manager.dart';
 
@@ -33,6 +34,8 @@ class _OnbordingViewState extends State<OnbordingView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: ColorManager.white,
+        elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
         ),
@@ -50,23 +53,23 @@ class _OnbordingViewState extends State<OnbordingView> {
           return OnpordingPage(_list[index]);
         },
       ),
-      bottomSheet: Container(
-        height: 500,
-        color: ColorManager.white,
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  AppStrings.skip,
-                ),
+      bottomSheet: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              },
+              child: Text(
+                AppStrings.skip,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            _getBottomsheetWidget(),
-          ],
-        ),
+          ),
+          _getBottomsheetWidget(),
+        ],
       ),
     );
   }
@@ -81,6 +84,9 @@ class _OnbordingViewState extends State<OnbordingView> {
           Padding(
             padding: EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
+              onTap: () => _pageController.animateToPage( _getPreviousindex(),
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease),
               child: SizedBox(
                 width: AppSize.s20,
                 height: AppSize.s20,
@@ -88,7 +94,7 @@ class _OnbordingViewState extends State<OnbordingView> {
               ),
             ),
           ),
-    
+
           Row(
             children: [
               for (int i = 0; i < _list.length; i++)
@@ -98,11 +104,14 @@ class _OnbordingViewState extends State<OnbordingView> {
                 )
             ],
           ),
-    
+
           //right arrow
           Padding(
             padding: EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
+               onTap: () => _pageController.animateToPage( _getNextIndex(),
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease),
               child: SizedBox(
                 width: AppSize.s20,
                 height: AppSize.s20,
@@ -115,16 +124,40 @@ class _OnbordingViewState extends State<OnbordingView> {
     );
   }
 
-  
- _getProperCircle(index){
-  if (index == _currentIndex) {
-   return SizedBox(   width: AppSize.s20,
-                height: AppSize.s20,child: SvgPicture.asset(ImagesAssets.hollowCiricleIc));
-    
-  }else {return SizedBox(   width: AppSize.s20,
-                height: AppSize.s20,child: SvgPicture.asset(ImagesAssets.solidCiricleIc));}
-}
+  int _getPreviousindex(){
+    int PreviousIndex = --_currentIndex;
+    if (PreviousIndex == -1) {
+      PreviousIndex = _list.length - 1;
 
+    }
+          return PreviousIndex;
+
+  }
+   int _getNextIndex() {
+
+    int nextIndex = ++_currentIndex;
+    if (nextIndex == _list.length) {
+      nextIndex = 0 ;
+
+    }
+          return nextIndex;
+
+  }
+
+
+  _getProperCircle(index) {
+    if (index == _currentIndex) {
+      return SizedBox(
+          width: AppSize.s20,
+          height: AppSize.s20,
+          child: SvgPicture.asset(ImagesAssets.hollowCiricleIc));
+    } else {
+      return SizedBox(
+          width: AppSize.s20,
+          height: AppSize.s20,
+          child: SvgPicture.asset(ImagesAssets.solidCiricleIc));
+    }
+  }
 }
 
 class SliderObject {

@@ -59,9 +59,9 @@ ThemeData getApplicationTheme() {
         color: ColorManager.darkGray,
         fontSize: FontSizeManager.s14,
       ),
-      titleMedium: getRegularStyle(
-        color: ColorManager.darkGray,
-        fontSize: FontSizeManager.s14,
+      titleMedium: getMediumStyle(
+        color: ColorManager.primary,
+        fontSize: FontSizeManager.s16,
       ),
       displayLarge: getSemiBoldStyle(
         color: ColorManager.darkGray,
